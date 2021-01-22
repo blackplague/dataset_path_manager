@@ -138,36 +138,3 @@ class DatasetPathManager:
             The test dataset path, see Example
         """
         return self._test_data_path
-
-"""
-        Parameters
-        ----------
-        search_string : str
-            Search string to search CVR for
-        top_n : int
-            The top number of results to return based on ElasticSearch _score
-        only_active : bool
-            The query should now only return companies that have sammensatStatus as
-            'NORMAL' or 'Active'.
-        search_params : Dict
-            Specifies search_parameters for the underlying elastic search client, the
-                default being:
-                    search_params={
-                        'method': 'query_string',
-                        'proximity_search': True,
-                        'maximum_edit_distance': 5
-                    }
-        format : str
-            Specifies the format of the data, currently supporting: 'dict',
-                'json' and 'dataframe'
-
-
-        Raises
-        ------
-        UnknownSearchMethodException
-            If called with an invalid search method in the search_params
-        UnknownFormatException
-            If called with an invalid format string
-
-
-"""
