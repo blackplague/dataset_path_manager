@@ -73,7 +73,7 @@ class DatasetPathManager:
         str
             The dataset base path, see Example
         """
-        return self.dataset_base_path
+        return self._dataset_base_path
 
     @property
     def dataset_path(self) -> str:
