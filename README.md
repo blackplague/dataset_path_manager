@@ -28,9 +28,9 @@ print(f'Validation data path: {validation_path}')
 print(f'Test data path: {test_path}')
 ```
 
-If _dataset_base_path_ left to be *None* DatasetPathManager will read the environment variable
-called *DATASET_BASE_PATH* from the system and use that instead. It also allows for overwriting
-the "standard" location of training, validation and test directories.
+If ***dataset_base_path*** left to be **None** DatasetPathManager will read the environment
+variable called **DATASET_BASE_PATH** from the system and use that instead. It also allows
+for overwriting the "standard" location of training, validation and test directories.
 
 Overwriting standard locations:
 
