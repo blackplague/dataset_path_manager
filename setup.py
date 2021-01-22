@@ -7,5 +7,7 @@ setup(
     author='Michael Andersen',
     author_email='gosuckadeadcow+github@gmail.com',
     url='https://github.com/blackplague/dataset_path_manager',
-    packages=find_packages(include=['datasetpathmanager', 'datasetpathmanager.*'])
+    packages=find_packages(include=['datasetpathmanager', 'datasetpathmanager.*']),
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
 )
