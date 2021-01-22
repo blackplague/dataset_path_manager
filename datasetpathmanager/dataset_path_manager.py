@@ -16,7 +16,7 @@ class DatasetPathManager:
             self._dataset_base_path = os.environ['DATASET_BASE_PATH']
         else:
             self._dataset_base_path = dataset_base_path
-        self._dataset_path = os.path.join(self.dataset_base_path, self._dataset_target)
+        self._dataset_path = os.path.join(self._dataset_base_path, self._dataset_target)
         self._training_data_path = os.path.join(self._dataset_path, train_dir)
         self._validation_data_path = os.path.join(self._dataset_path, validation_dir)
         self._test_data_path = os.path.join(self.dataset_path, test_dir)
