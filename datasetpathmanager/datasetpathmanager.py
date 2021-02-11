@@ -1,5 +1,7 @@
-from typing import Optional, Tuple
+from itertools import combinations
+from typing import List, Optional, Tuple
 import os
+
 
 class DatasetPathManager:
 
@@ -138,3 +140,50 @@ class DatasetPathManager:
             The test dataset path, see Example
         """
         return self._test_data_path
+
+    def get_classes(self) -> Optional[List[str]]:
+        """Tries to infer the classes based on subfolders in test, train and validation directories
+
+        It will ignore all files present in the directories test, train and validation directories,
+        only considering subfolders.
+
+        Example
+        -------
+        If you have a dataset located at "/home/user/datasets/dataset1" it will look for
+        subdirectories in the follow places:
+        /home/user/datasets/dataset1/{test,train,validation}
+
+        Hence, if there are the follow classes:
+        /home/user/datasets/dataset1/{test,train,validation}/{class1, class2}
+
+        This will return ['class1', 'class2']
+
+        Returns
+        -------
+        Optional[List[str]]
+            If no inconsistencies where found, returns a list of classes in sorted order, otherwise
+            None will be returned
+        """
+        potential_classes = []
+        for p in self.get_paths():
+            cs = [c for c in os.listdir(p) if os.path.isdir(os.path.join(p, c))]
+            potential_classes.append((p, cs))
+
+        inconsistent_classes = False
+        for t1, t2 in combinations(potential_classes, 2):
+            if not self._compare(t1[1], t2[1]):
+                inconsistent_classes = True
+
+        if inconsistent_classes:
+            print(f'Class inconsistencies found:')
+            for p, c in potential_classes:
+                print(f'\tPath={p}, Classes={c}')
+            return None
+        return sorted(potential_classes[0][1])
+
+    @staticmethod
+    def _compare(l1: List[str], l2: List[str]) -> bool:
+        for a, b in zip(sorted(l1), sorted(l2)):
+            if a != b:
+                return False
+        return True
