@@ -141,6 +141,29 @@ class DatasetPathManager:
         """
         return self._test_data_path
 
+    @property
+    def class_test_path(self) -> Optional[List[str]]:
+        """Return the full path to every class found in the test directory
+
+        Example
+        -------
+        If you have the following classes located at
+        "/home/user/datasets/dataset1/test/{class1, class2}"
+        This will return:
+        ["/home/user/datasets/dataset1/test/class1",
+         "/home/user/datasets/dataset1/test/class2"]
+
+        Returns
+        -------
+        Optional[List[str]]
+            If no inconsistencies where found, returns a list of paths to the test classes in
+            sorted order in sorted order, otherwise None will be returned
+        """
+        classes = self.get_classes()
+        if classes is None:
+            return None
+        return [os.path.join(self.test_path, c) for c in classes]
+
     def get_classes(self) -> Optional[List[str]]:
         """Tries to infer the classes based on subfolders in test, train and validation directories
 
