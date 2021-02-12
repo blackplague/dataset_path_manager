@@ -164,7 +164,7 @@ class DatasetPathManager:
             return None
         return [os.path.join(self.test_path, c) for c in classes]
 
-    def get_classes(self) -> Optional[List[str]]:
+    def get_classes(self) -> List[str]:
         """Tries to infer the classes based on subfolders in test, train and validation directories
 
         It will ignore all files present in the directories test, train and validation directories,
@@ -185,7 +185,7 @@ class DatasetPathManager:
         -------
         Optional[List[str]]
             If no inconsistencies where found, returns a list of classes in sorted order, otherwise
-            None will be returned
+            [] will be returned
         """
         potential_classes = []
         for p in self.get_paths():
@@ -201,7 +201,7 @@ class DatasetPathManager:
             print(f'Class inconsistencies found:')
             for p, c in potential_classes:
                 print(f'\tPath={p}, Classes={c}')
-            return None
+            return []
         return sorted(potential_classes[0][1])
 
     @staticmethod
