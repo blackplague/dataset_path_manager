@@ -183,7 +183,7 @@ class DatasetPathManager:
 
         Returns
         -------
-        Optional[List[str]]
+        List[str]
             If no inconsistencies where found, returns a list of classes in sorted order, otherwise
             [] will be returned
         """
