@@ -11,7 +11,8 @@ class DatasetPathManager:
         dataset_base_path: Optional[str]=None,
         train_dir: str='train',
         validation_dir: str='validation',
-        test_dir: str='test'):
+        test_dir: str='test'
+    ):
 
         self._dataset_target = dataset_target
         if dataset_base_path is None:
@@ -22,7 +23,7 @@ class DatasetPathManager:
         self._training_data_path = os.path.join(self._dataset_path, train_dir)
         self._validation_data_path = os.path.join(self._dataset_path, validation_dir)
         self._test_data_path = os.path.join(self.dataset_path, test_dir)
-        
+
     def get_paths(self) -> Tuple[str, str, str]:
         """Return paths to training_data, validation_data and test_data in that order
 
@@ -198,7 +199,7 @@ class DatasetPathManager:
                 inconsistent_classes = True
 
         if inconsistent_classes:
-            print(f'Class inconsistencies found:')
+            print('Class inconsistencies found:')
             for p, c in potential_classes:
                 print(f'\tPath={p}, Classes={c}')
             return []
