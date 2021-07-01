@@ -1,4 +1,4 @@
-from datasetpathmanager.datasetpathmanager import DatasetPathManager
+from datasetpathmanager.datasetpathmanager import DatasetPathManager, UnknownDatasetBasePath
 import pytest
 import os
 
@@ -44,3 +44,14 @@ def test_dataset_test_path(dpm_instance):
         '/home/user/datasets',
         'cat_vs_dog',
         'my_test_dir')
+
+
+def test_dataset_no_basepath():
+    with pytest.raises(UnknownDatasetBasePath) as _:
+        DatasetPathManager(
+            dataset_target='cat_vs_dog',
+            dataset_base_path=None,
+            train_dir='my_training_dir',
+            validation_dir='my_validation_dir',
+            test_dir='my_test_dir'
+        )
