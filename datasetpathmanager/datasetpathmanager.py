@@ -3,6 +3,10 @@ from typing import List, Optional, Tuple
 import os
 
 
+class UnknownDatasetBasePath(Exception):
+    pass
+
+
 class DatasetPathManager:
 
     def __init__(
@@ -15,10 +19,14 @@ class DatasetPathManager:
     ):
 
         self._dataset_target = dataset_target
-        if dataset_base_path is None:
+        if dataset_base_path is not None:
+            self._dataset_base_path = dataset_base_path
+        elif os.environ.get('DATASET_BASE_PATH') is not None:
             self._dataset_base_path = os.environ['DATASET_BASE_PATH']
         else:
-            self._dataset_base_path = dataset_base_path
+            raise UnknownDatasetBasePath(
+                'No Dataset base path was provided, neither as argument or found in $DATASET_BASE_PATH')
+
         self._dataset_path = os.path.join(self._dataset_base_path, self._dataset_target)
         self._training_data_path = os.path.join(self._dataset_path, train_dir)
         self._validation_data_path = os.path.join(self._dataset_path, validation_dir)
