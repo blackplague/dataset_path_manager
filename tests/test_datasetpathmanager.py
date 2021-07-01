@@ -1,4 +1,4 @@
-from datasetpathmanager import DatasetPathManager
+from datasetpathmanager.datasetpathmanager import DatasetPathManager
 import pytest
 import os
 
