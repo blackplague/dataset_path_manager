@@ -1,0 +1,10 @@
+# Development envs
+.vscode/
+
+
+# Caching
+*/__pycache__/
+
+
+# Env files
+Pipfile.lock
